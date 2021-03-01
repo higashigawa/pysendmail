@@ -21,7 +21,7 @@ message = '__メール本文__'
 def sendToInfoMail(smtp_server, smtp_port, smtp_id, smtp_pw, mail_from, mail_to, subject, message):
 
     # メール送信処理
-    mail = MIMEText(massage)
+    mail = MIMEText(message)
     mail['Subject'] = subject
     mail['From'] = mail_from
     mail['To'] = mail_from
@@ -32,11 +32,12 @@ def sendToInfoMail(smtp_server, smtp_port, smtp_id, smtp_pw, mail_from, mail_to,
     smtp.starttls()
     smtp.ehlo()
     smtp.login(smtp_id, smtp_pw)
-    smtp.sendmail(mail_from, mail_to.split(','), mail.as_string())
+    #smtp.sendmail(mail_from, mail_to.split(','), mail.as_string())
+    smtp.sendmail(mail_from, mail_to, mail.as_string())
     smtp.close()
 
 def main():
-    sendToInfoMail(smtp_server, smtp_port, smtp_id, smtp_pw, mail_from, mail_to, subject, message):
+    sendToInfoMail(smtp_server, smtp_port, smtp_id, smtp_pw, mail_from, mail_to, subject, message)
 
 
 if __name__ == '__main__':
